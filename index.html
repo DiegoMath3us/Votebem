@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VotoClaro — Conheça os candidatos das Eleições 2026</title>
+  <meta name="description" content="Escolha um candidato à Presidência em 2026, conheça sua trajetória, propostas e controvérsias, e descubra quais candidatos a governador, senador e deputado do seu estado têm afinidade com ele. Sem login, sem cadastro." />
+  <meta name="theme-color" content="#070b16" />
+  <link href="css/fonts.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="bg" aria-hidden="true">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="orb orb-c"></div>
+    <div class="bg-grid"></div>
+  </div>
+
+  <!-- TOPO -->
+  <header class="topbar" id="topbar">
+    <button class="brand" id="btn-home" aria-label="Voltar ao início">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>
+      </span>
+      <span class="brand-name">Voto<b>Claro</b></span>
+    </button>
+    <div class="topbar-actions">
+      <button class="chip-btn" id="btn-como">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+        <span>Como funciona</span>
+      </button>
+      <button class="chip-btn accent" id="btn-trocar" hidden>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+        <span>Trocar presidente</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="app">
+
+    <!-- INÍCIO -->
+    <section class="view view-home" id="view-home">
+      <div class="hero">
+        <p class="eyebrow"><span class="pulse"></span>Eleições 2026 · Plataforma informativa e apartidária</p>
+        <h1 class="hero-title">Escolha um presidente.<br /><span class="grad-text">Descubra quem governa com ele.</span></h1>
+        <p class="hero-sub">Conheça a trajetória, as propostas e as controvérsias de cada candidato, com a fonte de cada informação. Depois, veja quais candidatos do seu estado têm afinidade com as ideias dele.</p>
+      </div>
+
+      <div class="pres-grid" id="pres-grid" role="list"></div>
+
+      <ol class="how" id="how">
+        <li class="how-step"><span class="how-n">1</span><div><strong>Escolha um presidente</strong><p>Toque em um card para começar.</p></div></li>
+        <li class="how-step"><span class="how-n">2</span><div><strong>Conheça a fundo</strong><p>Trajetória, propostas, realizações e controvérsias, com fontes.</p></div></li>
+        <li class="how-step"><span class="how-n">3</span><div><strong>Veja seu estado</strong><p>Governador, senadores e deputados, com o rótulo de afinidade.</p></div></li>
+      </ol>
+    </section>
+
+    <!-- FLUXO DO PRESIDENTE -->
+    <section class="view view-flow" id="view-flow" hidden>
+      <nav class="stepper" id="stepper" aria-label="Etapas"></nav>
+      <div class="flow-layout">
+        <aside class="capsule" id="capsule"></aside>
+        <div class="stage-wrap">
+          <div class="stage" id="stage" tabindex="-1"></div>
+          <div class="stage-nav">
+            <button class="btn btn-ghost" id="btn-prev">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m15 18-6-6 6-6"/></svg>
+              <span>Voltar</span>
+            </button>
+            <span class="step-count" id="step-count"></span>
+            <button class="btn btn-primary" id="btn-next">
+              <span id="btn-next-label">Próximo</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer">
+    <p><strong>VotoClaro</strong> é um projeto acadêmico, sem afiliação partidária e sem recomendação de voto.</p>
+    <p class="footer-src">Dados: <a href="https://divulgacandcontas.tse.jus.br" target="_blank" rel="noopener">TSE · DivulgaCandContas</a> · <a href="https://servicodados.ibge.gov.br" target="_blank" rel="noopener">IBGE</a> · <a href="https://pt.wikipedia.org" target="_blank" rel="noopener">Wikipédia</a> · Posições dos partidos: <a href="https://doi.org/10.1590/1807-0191202531120" target="_blank" rel="noopener">Bolognesi et al. (2025)</a></p>
+    <p class="footer-ver">Versão 6.1 · dados do TSE em cache, consultados em 16/09/2026 e 22/10/2026 (a data de cada lista aparece na tela)</p>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true" id="modal-card">
+      <button class="modal-x" id="modal-close" data-close aria-label="Fechar">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/presidentes.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
