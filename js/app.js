@@ -884,9 +884,9 @@ function renderGrade(root, dados, st) {
       </select>
       ${temEleitos ? `<label class="toggle"><input type="checkbox" id="f-eleitos" ${f.eleitos ? "checked" : ""}><span></span>Só eleitos</label>` : ""}
     </div>
-    <div class="chips" role="tablist">
-      <button class="fchip ${!f.tier ? "on" : ""}" data-tier="">Todos <b>${dados.length}</b></button>
-      ${Object.entries(TIERS).filter(([k]) => k !== "sem" || cont.sem).map(([k, t]) => `<button class="fchip ${f.tier === k ? "on" : ""}" data-tier="${k}" style="--tc:${t.cor}"><i></i>${t.curto} <b>${cont[k]}</b></button>`).join("")}
+    <div class="chips" role="group" aria-label="Filtrar por faixa de afinidade">
+      <button class="fchip ${!f.tier ? "on" : ""}" data-tier="" aria-pressed="${!f.tier}">Todos <b>${dados.length}</b></button>
+      ${Object.entries(TIERS).filter(([k]) => k !== "sem" || cont.sem).map(([k, t]) => `<button class="fchip ${f.tier === k ? "on" : ""}" data-tier="${k}" aria-pressed="${f.tier === k}" style="--tc:${t.cor}"><i></i>${t.curto} <b>${cont[k]}</b></button>`).join("")}
     </div>
     ${ordemHTML()}
     ${consultaHTML(root._consulta)}
@@ -1009,6 +1009,9 @@ function openModal(html) {
   const m = $("#modal");
   m.classList.add("open");
   m.setAttribute("aria-hidden", "false");
+  m.removeAttribute("inert");
+  const titulo = m.querySelector("#modal-body h2, #modal-body h3");
+  if (titulo) { titulo.id = "modal-title"; m.setAttribute("aria-labelledby", "modal-title"); } else { m.removeAttribute("aria-labelledby"); m.setAttribute("aria-label", "Detalhes do candidato"); }
   document.body.classList.add("no-scroll");
   animateRings(m);
   setTimeout(() => $("#modal-close").focus(), 50);
@@ -1017,6 +1020,7 @@ function closeModal() {
   const m = $("#modal");
   m.classList.remove("open");
   m.setAttribute("aria-hidden", "true");
+  m.setAttribute("inert", "");
   document.body.classList.remove("no-scroll");
   _lastFocus?.focus?.();
 }
@@ -1111,7 +1115,7 @@ document.addEventListener("click", (e) => {
   if (fchip) {
     const st = STEPS[S.step];
     S.filtros[st.cargo].tier = fchip.dataset.tier;
-    $$(".fchip").forEach((b) => b.classList.toggle("on", b === fchip));
+    $$(".fchip").forEach((b) => { b.classList.toggle("on", b === fchip); b.setAttribute("aria-pressed", String(b === fchip)); });
     return aplicarFiltros(st);
   }
 
