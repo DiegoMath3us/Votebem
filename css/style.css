@@ -12,8 +12,8 @@
   --border: rgba(255, 255, 255, 0.09);
   --border-2: rgba(255, 255, 255, 0.16);
   --text: #e9edf7;
-  --muted: #9aa5bd;
-  --dim: #76819b; /* v6.1: contraste 5,0:1 sobre --bg (WCAG AA) */
+  --muted: #a7b1c7; /* v6.1: contraste 4,5:1 ou mais também sobre os cards destacados */
+  --dim: #909bb3; /* v6.1: contraste 5,8:1 sobre os cards e 6,9:1 sobre --bg (WCAG AA) */
 
   --green: #34d399;
   --gold: #fbbf24;
@@ -494,7 +494,7 @@ h4 { font-size: 0.95rem; margin: 18px 0 10px; color: var(--text); }
 .cand .avatar { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px color-mix(in srgb, var(--tc) 80%, transparent); }
 .cand-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .cand-info strong { font-size: 0.9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cand-info span { font-size: 0.75rem; color: var(--dim); }
+.cand-info span { font-size: 0.75rem; color: var(--muted); }
 .cand-aff { font-family: var(--font-d); font-weight: 800; font-size: 0.95rem; color: var(--tc); }
 .cand-flag { position: absolute; top: 6px; left: 50px; font-size: 0.7rem; color: var(--gold); text-shadow: 0 0 8px var(--gold); }
 .sentinel { height: 1px; }
@@ -524,7 +524,7 @@ h4 { font-size: 0.95rem; margin: 18px 0 10px; color: var(--text); }
 .badge { display: inline-block; padding: 3px 9px; border-radius: 999px; font-size: 0.7rem; font-weight: 700; white-space: nowrap; letter-spacing: 0.02em; }
 .b-ok { background: rgba(52, 211, 153, 0.16); color: var(--green); border: 1px solid rgba(52, 211, 153, 0.45); }
 .b-gold { background: rgba(251, 191, 36, 0.18); color: var(--gold); border: 1px solid rgba(251, 191, 36, 0.5); backdrop-filter: blur(6px); }
-.b-dim { background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }
+.b-dim { background: var(--surface-2); color: #b3bcd0; border: 1px solid var(--border); }
 .b-bad { background: rgba(248, 113, 113, 0.14); color: var(--red); border: 1px solid rgba(248, 113, 113, 0.45); }
 .party-chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; background: color-mix(in srgb, var(--pc) 16%, transparent); border: 1px solid color-mix(in srgb, var(--pc) 45%, transparent); color: color-mix(in srgb, var(--pc) 45%, white); }
 .party-chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--pc); }
