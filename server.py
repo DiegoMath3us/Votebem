@@ -191,8 +191,16 @@ def eleicao(uf: str, cargo: str):
         return JSONResponse({"erro": str(e)}, status_code=502)
     dados.sort(key=lambda c: c["urna"])
     chave = tse_client._cache_key(CARGO_ID[cargo.lower()](uf), uf)
-    return {"dados": dados, "total": len(dados), "uf": uf, "cargo": cargo,
+    resp = {"dados": dados, "total": len(dados), "uf": uf, "cargo": cargo,
             "consultado_em": consultado_em(chave)}
+    if tse_client.OFFLINE and resp["consultado_em"] is None:
+        # Modo offline sem consulta gravada para esta UF e cargo: a lista vazia
+        # não significa que não houve candidatos. Informa as UFs que têm dados.
+        resp["sem_cache"] = True
+        resp["ufs_com_dados"] = sorted(
+            u for u in tse_client.UFS
+            if tse_client.cache_ts(tse_client._cache_key(CARGO_ID[cargo.lower()](u), u)))
+    return resp
 
 
 @app.get("/api/detalhe/{uf}/{tse_id}")
