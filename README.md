@@ -1,8 +1,18 @@
 # VotoClaro 6.1
 
+[![Testes](https://github.com/DiegoMath3us/Votebem/actions/workflows/testes.yml/badge.svg)](https://github.com/DiegoMath3us/Votebem/actions/workflows/testes.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24095281.svg)](https://doi.org/10.5281/zenodo.24095281)
+
 Plataforma web informativa sobre as eleições gerais de 2026. O eleitor escolhe um candidato à Presidência, conhece trajetória, propostas, realizações e controvérsias (com a fonte de cada item), informa o estado e vê os candidatos a governador, senador, deputado estadual e deputado federal daquela UF, em ordem alfabética, com um rótulo de afinidade entre o partido de cada um e o partido do presidente escolhido. Não há cadastro, login nem recomendação de voto.
 
 Trabalho de Conclusão de Curso de Engenharia de Software, Universidade São Judas Tadeu. Orientador: Prof. Nelson Aguiar.
+
+## Executar no GitHub, sem instalar nada
+
+1. Na página do repositório, clique em **Code**, aba **Codespaces**, e depois em **Create codespace on main**.
+2. Espere a preparação (cerca de 2 minutos na primeira vez). O servidor sobe sozinho em modo offline, com os dados do artigo.
+3. O VotoClaro abre numa nova aba. Se não abrir, vá à aba **Ports** do Codespace e clique no endereço da porta 8000.
+
+Os testes automatizados rodam a cada alteração no repositório, em Linux e Windows, na aba **Actions** (fluxo "Testes"). O roteiro de 20 casos no navegador roda na mesma ação, e as capturas e medidas ficam disponíveis para download no resultado.
 
 ## Como executar
 
