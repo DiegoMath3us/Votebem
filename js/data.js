@@ -9,10 +9,11 @@
  */
 
 // --- CONFIG ---------------------------------------------------------------
-const API_BASE =
-  location.protocol.startsWith("http") && location.port === "8000"
-    ? "/api"
-    : "http://localhost:8000/api";
+// A API é servida pelo mesmo servidor da página (local, Codespaces ou outro host).
+// Só quando o index.html é aberto direto do disco (file://) usa o servidor local.
+const API_BASE = location.protocol.startsWith("http")
+  ? `${location.origin}/api`
+  : "http://127.0.0.1:8000/api";
 
 const ESTADOS = [
   ["AC", "Acre"], ["AL", "Alagoas"], ["AP", "Amapá"], ["AM", "Amazonas"], ["BA", "Bahia"],
