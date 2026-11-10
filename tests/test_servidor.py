@@ -71,6 +71,10 @@ class ApiOffline(unittest.TestCase):
         r = server.eleicao("MG", "dep-federal")
         self.assertEqual(r["total"], 0)
         self.assertIsNone(r["consultado_em"])
+        # A resposta avisa que não há consulta gravada e lista as UFs que têm dados.
+        self.assertTrue(r["sem_cache"])
+        self.assertEqual(server.eleicao("GO", "senador")["ufs_com_dados"], ["BA", "SP"])
+        self.assertNotIn("sem_cache", server.eleicao("SP", "senador"))
 
     def test_entradas_invalidas(self):
         self.assertEqual(server.eleicao("XX", "governador").status_code, 400)

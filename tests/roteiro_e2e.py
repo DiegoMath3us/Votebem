@@ -256,8 +256,8 @@ def main():
         page.goto(BASE + "/#/p/lula/local"); page.wait_for_selector(".uf")
         page.locator(".uf[data-uf='MG']").click()
         page.locator(".step[data-step='8']").click(); page.wait_for_selector(".empty")
-        caso("T18", "RNF06", "Dep. federais em MG (sem cache)", "Mensagem de lista vazia",
-             lambda: (page.locator(".empty").inner_text(), "Nenhum candidato" in page.locator(".empty").inner_text()))
+        caso("T18", "RNF06", "Dep. federais em MG (sem cache)", "Aviso de que não há dados no modo offline, com as UFs que têm dados",
+             lambda: (page.locator(".empty").inner_text().split("\n")[0], "Sem dados de deputado federal em Minas Gerais" in page.locator(".empty").inner_text() and "São Paulo" in page.locator(".empty").inner_text()))
 
         # TSE/servidor indisponível (exceção): a rota da API falha
         page.route("**/api/eleicao/**", lambda r: r.abort())
