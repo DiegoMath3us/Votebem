@@ -1,0 +1,1 @@
+{"name":"VotoClaro 6.1","image":"mcr.microsoft.com/devcontainers/python:3.12","features":{"ghcr.io/devcontainers/features/node:1":{"version":"20"}},"postCreateCommand":"pip install -r requirements.txt","postAttachCommand":"python server.py --offline --no-browser","forwardPorts":[8000],"portsAttributes":{"8000":{"label":"VotoClaro","onAutoForward":"openBrowser"}}}
