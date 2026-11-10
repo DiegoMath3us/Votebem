@@ -748,7 +748,10 @@ async function carregarLista(st) {
     const dados = comAfinidade(lista);
     root._consulta = API.consulta(uf, st.cargo);
     if (!dados.length) {
-      root.innerHTML = `<div class="empty">Nenhum candidato encontrado para ${esc(st.titulo.toLowerCase())} em ${esc(ESTADO_NOME[uf])}.</div>`;
+      const comDados = API.semCache(uf, st.cargo);
+      root.innerHTML = comDados
+        ? `<div class="empty"><strong>Sem dados de ${esc(st.titulo.toLowerCase())} em ${esc(ESTADO_NOME[uf])} nesta versão.</strong><br>A plataforma está em modo offline e usa só as consultas ao TSE gravadas para o artigo. Para este cargo, há dados de: ${comDados.map((u) => esc(ESTADO_NOME[u] || u)).join(", ") || "nenhum estado"}. Para consultar o TSE, rode o servidor sem a opção --offline.</div>`
+        : `<div class="empty">Nenhum candidato encontrado para ${esc(st.titulo.toLowerCase())} em ${esc(ESTADO_NOME[uf])}.</div>`;
       return;
     }
     if (st.cargo === "governador") renderGovernadores(root, dados);

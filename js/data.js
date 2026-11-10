@@ -167,11 +167,13 @@ function memo(key, fn) {
 
 // --- API LOCAL (TSE) ----------------------------------------------------------
 const CONSULTA = {}; // "UF:cargo" -> data e hora da consulta ao TSE (ISO)
+const SEM_CACHE = {}; // "UF:cargo" sem consulta gravada no modo offline -> UFs que têm dados
 const API = {
   presidentes: () => memo("pres", () => fetchJSON(`${API_BASE}/presidentes`, { timeout: 8000 }).then((r) => r.dados || [])),
   eleicao: (uf, cargo) => memo(`el:${uf}:${cargo}`, () => fetchJSON(`${API_BASE}/eleicao/${uf}/${cargo}`, { timeout: 45000 })
-    .then((r) => { CONSULTA[`${uf}:${cargo}`] = r.consultado_em || null; return r.dados || []; })),
+    .then((r) => { CONSULTA[`${uf}:${cargo}`] = r.consultado_em || null; SEM_CACHE[`${uf}:${cargo}`] = r.sem_cache ? (r.ufs_com_dados || []) : null; return r.dados || []; })),
   consulta: (uf, cargo) => CONSULTA[`${uf}:${cargo}`] || null,
+  semCache: (uf, cargo) => SEM_CACHE[`${uf}:${cargo}`] || null,
   detalhe: (uf, id) => memo(`det:${uf}:${id}`, () => fetchJSON(`${API_BASE}/detalhe/${uf}/${id}`).then((r) => r.dados)),
   foto: (uf, id) => `${API_BASE}/foto/${uf}/${id}`,
 };
