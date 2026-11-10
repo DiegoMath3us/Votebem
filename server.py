@@ -136,8 +136,11 @@ def consultado_em(key):
     ts = tse_client.cache_ts(key)
     if not ts:
         return None
-    from datetime import datetime, timezone
-    return datetime.fromtimestamp(ts, tz=timezone.utc).astimezone().isoformat(timespec="minutes")
+    from datetime import datetime, timedelta, timezone
+    # Horário de Brasília (UTC-3, sem horário de verão desde 2019), para que a data
+    # não dependa do fuso do computador que roda o servidor.
+    brasilia = timezone(timedelta(hours=-3))
+    return datetime.fromtimestamp(ts, tz=brasilia).isoformat(timespec="minutes")
 
 
 def tse_indisponivel():
